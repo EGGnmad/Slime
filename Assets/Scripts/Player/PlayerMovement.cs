@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
         moveVelocity = new Vector2(horizontalValue, verticalValue).normalized;
         beforeDirection = moveVelocity;
-
         moveVelocity *= speed;
 
         // dash
@@ -54,7 +53,9 @@ public class PlayerMovement : MonoBehaviour
     private void LateUpdate()
     {
         if (isDashing) return;
+
         rb.velocity = moveVelocity;
+
         Flip();
     }
 
