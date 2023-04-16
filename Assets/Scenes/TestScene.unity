@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 948548303}
   m_Layer: 0
   m_Name: King
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1212,6 +1212,7 @@ GameObject:
   - component: {fileID: 1908140340}
   - component: {fileID: 1908140344}
   - component: {fileID: 1908140343}
+  - component: {fileID: 1908140345}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1360,3 +1361,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1908140345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908140336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9688af996bf4e0690371bbc9c4e24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4687711169471872742, guid: 0c60e448464bb423b9dd555c35657a05, type: 3}
+  time: 0.3

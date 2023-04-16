@@ -25,11 +25,15 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
+    private BulletShooter bulletShooter;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        bulletShooter = GetComponent<BulletShooter>();
     }
 
     private void Update()
@@ -47,6 +51,15 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetTrigger("dash");
             StartCoroutine(Dash());
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            bulletShooter.StartFire();
+        }
+        else if (Input.GetKeyUp(KeyCode.J))
+        {
+            bulletShooter.StopFire();
         }
     }
 
