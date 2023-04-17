@@ -11,29 +11,27 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Dash")]
-    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingPower = 3f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
+    public bool isDashing;
     private bool canDash = true;
-    private bool isDashing;
 
 
     [Header("Others")]
     private bool isFacingRight = true;
 
-
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
-
-    private BulletShooter bulletShooter;
-
+    private FloatingSwordGenerator swordGenerator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        bulletShooter = GetComponent<BulletShooter>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        swordGenerator = GetComponent<FloatingSwordGenerator>();
     }
 
     private void Update()
@@ -44,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
         moveVelocity = new Vector2(horizontalValue, verticalValue).normalized;
         beforeDirection = moveVelocity;
+        if (beforeDirection.magnitude < 0.3f)
+            beforeDirection = Vector2.right * transform.localScale;
         moveVelocity *= speed;
 
         // dash
@@ -55,11 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            bulletShooter.StartFire();
-        }
-        else if (Input.GetKeyUp(KeyCode.J))
-        {
-            bulletShooter.StopFire();
+            swordGenerator.Circle(16);
         }
     }
 
@@ -86,12 +82,15 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        spriteRenderer.color = Color.gray;
         canDash = false;
         isDashing = true;
         rb.velocity = beforeDirection * dashingPower;
 
         yield return new WaitForSeconds(dashingTime);
 
+
+        spriteRenderer.color = Color.white;
         isDashing = false;
 
         yield return new WaitForSeconds(dashingCooldown);
