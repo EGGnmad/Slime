@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Model : MonoBehaviour
 {
-    [SerializeField] protected int hp;
+    public int hp;
 
     public abstract void TakeDamage(int decrease);
 }

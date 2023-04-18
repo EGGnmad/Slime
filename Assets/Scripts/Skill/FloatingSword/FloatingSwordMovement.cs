@@ -6,7 +6,10 @@ public class FloatingSwordMovement : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
     [SerializeField] float time = 5f;
-    Rigidbody2D rb;
+    [SerializeField] private string EnemyTag;
+
+
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +26,13 @@ public class FloatingSwordMovement : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(EnemyTag))
+        {
+            collision.GetComponent<PlayerModel>().TakeDamage(1);
+        }
     }
 }

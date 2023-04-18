@@ -20,18 +20,17 @@ public class KingMovement : MonoBehaviour
     [Header("Dash Settings")]
     [SerializeField] private float startDashMinDistance = 5f;
     [SerializeField] private float stopDashMinDistance = 0.2f;
-    [SerializeField] private float backDashDistance = 5f;
-
 
     [Header("Skill")]
     [SerializeField] private float comboAttackCooldown = 3f;
     [SerializeField] private float chargeAttackCooldown = 15f;
     [SerializeField] private float dashAttackCooldown = 30f;
-    [SerializeField] private float floatingSwordCooldown = 40f;
     [SerializeField] private bool canComboAttack = true;
     [SerializeField] private bool canChargeAttack = true;
     [SerializeField] private bool canDashAttack = true;
-    [SerializeField] private bool canFloatingSword = true;
+    private bool useFloatingSwordHalf = false;
+    private bool useFloatingSwordThird = false;
+
     private bool isAttacking = false;
 
     [Header("Skill Settings")]
@@ -46,19 +45,24 @@ public class KingMovement : MonoBehaviour
     [Header("Others")]
     [SerializeField] private TrailRenderer trailRenderer;
 
-
     private GameObject player;
     private bool isFacingRight = true;
 
     private Rigidbody2D rb;
     private Animator animator;
-    private KingAttack attack;
+    private KingModel model;
+    private AttackClass attack;
+    private FloatingSwordGenerator swordGenerator;
+    private EgoSwordGenerator egoSwordGenerator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        attack = GetComponent<KingAttack>();
+        model = GetComponent<KingModel>();
+        attack = GetComponent<AttackClass>();
+        swordGenerator = GetComponent<FloatingSwordGenerator>();
+        egoSwordGenerator = GetComponent<EgoSwordGenerator>();
 
         player = GameObject.Find("Player");
     }
@@ -70,7 +74,26 @@ public class KingMovement : MonoBehaviour
         float distance = direction.magnitude;
 
 
-        if(distance >= startDashMinDistance && !isAttacking && canDashAttack)
+        if((model.hp <= (int)(model.maxHp / 2) && !useFloatingSwordHalf))
+        {
+            useFloatingSwordHalf = true;
+
+            animator.SetBool("run", false);
+            animator.SetTrigger("attack4");
+
+            egoSwordGenerator.Generate(player); // target: player
+        }
+        else if((model.hp <= (int)(model.maxHp / 3) && !useFloatingSwordThird))
+        {
+            useFloatingSwordThird = true;
+
+            animator.SetBool("run", false);
+            animator.SetTrigger("attack4");
+
+            egoSwordGenerator.Generate(player); // target: player
+        }
+
+        else if(distance >= startDashMinDistance && !isAttacking && canDashAttack)
         {
             animator.SetBool("run", false);
 
@@ -241,7 +264,7 @@ public class KingMovement : MonoBehaviour
 
     public void ChargeAttackSwing()
     {
-        attack.Attack(2, chargeAttackCooldown);
+        attack.Attack(2, chargeAttackRange);
     }
 
     public void ChargeAttackExit()
@@ -256,5 +279,31 @@ public class KingMovement : MonoBehaviour
         yield return new WaitForSeconds(chargeAttackCooldown);
 
         canChargeAttack = true;
+    }
+
+
+    // Floating Sword Attack1
+    public void FloatingSwordAttack1()
+    {
+        StartCoroutine(startFloatingSwordAttack1());
+    }
+
+    IEnumerator startFloatingSwordAttack1()
+    {
+        swordGenerator.Circle(20);
+        yield return new WaitForSeconds(0.5f);
+        swordGenerator.Circle(18);
+        yield return new WaitForSeconds(0.5f);
+        swordGenerator.Circle(20);
+        yield return new WaitForSeconds(0.5f);
+        swordGenerator.Circle(18);
+        yield return new WaitForSeconds(0.5f);
+        swordGenerator.Circle(20);
+    }
+
+    // Death
+    public void Death()
+    {
+        egoSwordGenerator.DestroyAll();
     }
 }

@@ -19,19 +19,20 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Others")]
+    [SerializeField] private int damage;
     private bool isFacingRight = true;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private FloatingSwordGenerator swordGenerator;
+    private AttackClass attack;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        swordGenerator = GetComponent<FloatingSwordGenerator>();
+        attack = GetComponent<AttackClass>();
     }
 
     private void Update()
@@ -53,9 +54,9 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (isDashing)
         {
-            swordGenerator.Circle(16);
+            attack.Attack(damage, 0.5f);
         }
     }
 
@@ -82,15 +83,12 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        spriteRenderer.color = Color.gray;
         canDash = false;
         isDashing = true;
         rb.velocity = beforeDirection * dashingPower;
 
         yield return new WaitForSeconds(dashingTime);
 
-
-        spriteRenderer.color = Color.white;
         isDashing = false;
 
         yield return new WaitForSeconds(dashingCooldown);

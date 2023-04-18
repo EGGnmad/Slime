@@ -52,16 +52,15 @@ public class PlayerModel : Model
     {
         while (time >= 0f)
         {
-            sprite.color = Color.white;
+            sprite.color = Color.gray;
 
             yield return new WaitForSeconds(0.2f);
 
-            sprite.color = Color.clear;
+            sprite.color = Color.white;
 
             yield return new WaitForSeconds(0.2f);
 
             time -= 0.4f;
         }
-        sprite.color = Color.white;
     }
 }

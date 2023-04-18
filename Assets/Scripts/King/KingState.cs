@@ -35,6 +35,11 @@ public class KingState : StateModel
                 break;
 
             case "FloatingSwordAttack-Start":
+                movement.FloatingSwordAttack1();
+                break;
+
+            case "Death":
+                movement.Death();
                 break;
         }
     }
