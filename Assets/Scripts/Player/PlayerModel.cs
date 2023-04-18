@@ -12,14 +12,14 @@ public class PlayerModel : Model
     private Animator animator;
     private PlayerMovement movement;
     private SpriteRenderer sprite;
-    private PlayerCameraController cameraController;
+    private Rigidbody2D rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
         sprite = GetComponent<SpriteRenderer>();
-        cameraController = GetComponent<PlayerCameraController>();
     }
 
     public override void TakeDamage(int decrease)
@@ -31,9 +31,11 @@ public class PlayerModel : Model
 
         hp -= decrease;
 
-        if(hp == 0)
+        if(hp <= 0)
         {
-            //TODO: player die
+            rb.velocity = Vector2.zero;
+            animator.SetTrigger("death");
+            GetComponent<PlayerMovement>().enabled = false;
         }
 
         cameraController.Shake(5f*decrease, 0.1f);

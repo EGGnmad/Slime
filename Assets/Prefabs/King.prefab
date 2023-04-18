@@ -364,16 +364,12 @@ MonoBehaviour:
   dashingPower: 15
   startDashMinDistance: 1.5
   stopDashMinDistance: 1.5
-  backDashDistance: 5
   comboAttackCooldown: 0.5
   chargeAttackCooldown: 2
   dashAttackCooldown: 3
-  floatingSwordCooldown: 20
   canComboAttack: 1
   canChargeAttack: 1
   canDashAttack: 1
-  useFloatingSwordHalf: 0
-  useFloatingSwordThird: 0
   startComboAttackMaxDistance: 1
   startChargeAttackMaxDistance: 1.6
   comboAttack1Range: 1.4
@@ -394,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  cameraController: {fileID: 0}
   maxHp: 100
   godModeCooldown: 1
   canTakeDamage: 1

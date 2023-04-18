@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingSwordGenerator : MonoBehaviour
+public class GroundUpGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject sword;
+    [SerializeField] private GameObject ground;
 
 
     private void Generate(Vector2 pos, float angle)
     {
-        GameObject swordObject = Instantiate(sword, pos, Quaternion.identity);
+        GameObject groundObject = Instantiate(ground, pos, Quaternion.identity);
 
-        swordObject.transform.eulerAngles = new Vector3(0, 0, angle);
+        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
+        groundObject.GetComponent<GroundUpMovement>().direction = direction;
     }
 
     public void Circle(int swordCnt)

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KingModel : Model
+public class TrollModel : Model
 {
     public int maxHp;
-    [SerializeField] private float godModeCooldown = 1.5f;
+    [SerializeField] private float godModeCooldown = 1f;
     public bool canTakeDamage = true;
 
     private SpriteRenderer sprite;

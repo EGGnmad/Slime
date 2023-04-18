@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingSwordMovement : MonoBehaviour
+public class GroundUpMovement : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
     [SerializeField] float time = 5f;
     [SerializeField] private string EnemyTag;
 
+    public Vector2 direction;
 
     private Rigidbody2D rb;
 
@@ -16,7 +17,7 @@ public class FloatingSwordMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = transform.up * speed;
+        rb.velocity = direction * speed;
 
         StartCoroutine(DestroyTimer());
     }

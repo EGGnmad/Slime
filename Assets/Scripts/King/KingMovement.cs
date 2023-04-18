@@ -52,7 +52,7 @@ public class KingMovement : MonoBehaviour
     private Animator animator;
     private KingModel model;
     private AttackClass attack;
-    private FloatingSwordGenerator swordGenerator;
+    private CircleGenerator swordGenerator;
     private EgoSwordGenerator egoSwordGenerator;
 
     private void Start()
@@ -61,7 +61,7 @@ public class KingMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         model = GetComponent<KingModel>();
         attack = GetComponent<AttackClass>();
-        swordGenerator = GetComponent<FloatingSwordGenerator>();
+        swordGenerator = GetComponent<CircleGenerator>();
         egoSwordGenerator = GetComponent<EgoSwordGenerator>();
 
         player = GameObject.Find("Player");

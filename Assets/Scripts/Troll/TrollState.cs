@@ -13,7 +13,15 @@ public class TrollState : StateModel
 
     public override void StateEnter(string stateName)
     {
-        //TODO:
+        switch (stateName)
+        {
+            case "GroundAttack-Start":
+                movement.GroundAttack();
+                break;
+            case "GroundAttack-Swing":
+                movement.GroundAttackSwingStart();
+                break;
+        }
     }
 
     public override void StateUpdate(string stateName)
@@ -26,6 +34,10 @@ public class TrollState : StateModel
             case "Walk":
                 movement.Walk();
                 break;
+
+            case "GroundAttack-Swing":
+                movement.GroundAttackSwing();
+                break;
         }
     }
 
@@ -33,11 +45,11 @@ public class TrollState : StateModel
     {
         switch (stateName)
         {
-            case "Idle":
-                movement.ChooseAction();
-                break;
             case "Walk":
                 movement.WalkExit();
+                break;
+            case "GroundAttack-Swing":
+                movement.GroundAttackExit();
                 break;
         }
     }

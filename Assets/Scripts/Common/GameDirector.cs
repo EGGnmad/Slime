@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void PlayerDied()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BossDied(string bossName)
     {
-        
+
     }
 }
