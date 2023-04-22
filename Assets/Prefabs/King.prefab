@@ -205,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3414802256807183389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1, y: 1.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -365,8 +365,8 @@ MonoBehaviour:
   startDashMinDistance: 1.5
   stopDashMinDistance: 1.5
   comboAttackCooldown: 0.5
-  chargeAttackCooldown: 2
-  dashAttackCooldown: 3
+  chargeAttackCooldown: 3
+  dashAttackCooldown: 4
   canComboAttack: 1
   canChargeAttack: 1
   canDashAttack: 1
@@ -377,6 +377,7 @@ MonoBehaviour:
   chargeAttackRange: 3
   dashAttackRange: 1
   trailRenderer: {fileID: 3414802255253469959}
+  player: {fileID: 0}
 --- !u!114 &3414802256807183363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,11 +390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d510fa2eadd44e1b35bacda63d7288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
   hp: 100
   cameraController: {fileID: 0}
-  maxHp: 100
   godModeCooldown: 1
   canTakeDamage: 1
+  gameDirector: {fileID: 0}
 --- !u!114 &3414802256807183365
 MonoBehaviour:
   m_ObjectHideFlags: 0

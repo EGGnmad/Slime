@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttackClass : MonoBehaviour
 {
-    [SerializeField] private Transform transform;
-    [SerializeField] private LayerMask layer;
+    [SerializeField] protected Transform transform;
+    [SerializeField] protected LayerMask layer;
 
     public virtual void Attack(int damage, float radius)
     {

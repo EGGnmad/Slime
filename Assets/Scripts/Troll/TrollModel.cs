@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrollModel : Model
 {
-    public int maxHp;
     [SerializeField] private float godModeCooldown = 1f;
     public bool canTakeDamage = true;
 
     private SpriteRenderer sprite;
     private Animator animator;
+    [SerializeField] private GameDirector gameDirector;
+    [SerializeField] GameObject hpGauge;
+
 
     void Start()
     {
@@ -30,9 +33,13 @@ public class TrollModel : Model
         {
             animator.SetBool("run", false);
             animator.SetTrigger("death");
+
+            gameDirector.BossDied("Troll King");
         }
 
         cameraController.Shake(2f, 0.1f, false);
+
+        hpGauge.GetComponent<Slider>().value = (float)hp / maxHp;
 
         StartCoroutine(GodModeCooldown());
         StartCoroutine(GodModeIndicator(godModeCooldown));
@@ -48,6 +55,10 @@ public class TrollModel : Model
     {
         sprite.color = Color.gray;
         yield return new WaitForSeconds(time);
-        sprite.color = Color.white;
+
+        if (hp <= (int)(maxHp / 3))
+            sprite.color = Color.red;
+        else
+            sprite.color = Color.white;
     }
 }

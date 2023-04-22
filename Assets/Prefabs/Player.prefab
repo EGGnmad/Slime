@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 2470100071135459268}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 3
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2470100071135459279}
   - component: {fileID: 2470100071135459276}
   - component: {fileID: 4386971053481927402}
+  - component: {fileID: 4303535420851022810}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -198,7 +199,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
-  m_Size: {x: 1, y: 0.6}
+  m_Size: {x: 0.9, y: 0.5}
   m_Direction: 1
 --- !u!50 &2470100071135459278
 Rigidbody2D:
@@ -251,10 +252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f893fe8b36f6c4a2faa6765b973743a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 10
   hp: 10
   cameraController: {fileID: 2470100071135459276}
+  boss: {fileID: 0}
   godModeCooldown: 1.5
   canTakeDamage: 1
+  gameDirector: {fileID: 0}
 --- !u!114 &2470100071135459276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +288,20 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &4303535420851022810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470100071135459270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144a81524d1764d50b1d7127c8f02438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  egoSword: {fileID: 1420933821087439595, guid: 4027385c660444cfab6027125a10de1f,
+    type: 3}
 --- !u!1 &7559800741659040420
 GameObject:
   m_ObjectHideFlags: 0

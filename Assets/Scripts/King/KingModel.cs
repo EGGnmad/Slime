@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KingModel : Model
 {
-    public int maxHp;
     [SerializeField] private float godModeCooldown = 1.5f;
     public bool canTakeDamage = true;
 
     private SpriteRenderer sprite;
     private Animator animator;
+    [SerializeField] private GameDirector gameDirector;
+    [SerializeField] GameObject hpGauge;
 
     void Start()
     {
@@ -30,9 +32,13 @@ public class KingModel : Model
         {
             animator.SetBool("run", false);
             animator.SetTrigger("death");
+
+            gameDirector.BossDied("King");
         }
 
         cameraController.Shake(2f, 0.1f, false);
+
+        hpGauge.GetComponent<Slider>().value = (float)hp / maxHp;
 
         StartCoroutine(GodModeCooldown());
         StartCoroutine(GodModeIndicator(godModeCooldown));

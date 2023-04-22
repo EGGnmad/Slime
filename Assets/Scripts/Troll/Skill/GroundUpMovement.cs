@@ -33,7 +33,7 @@ public class GroundUpMovement : MonoBehaviour
     {
         if (collision.CompareTag(EnemyTag))
         {
-            collision.GetComponent<PlayerModel>().TakeDamage(1);
+            collision.GetComponent<Model>().TakeDamage(1);
         }
     }
 }

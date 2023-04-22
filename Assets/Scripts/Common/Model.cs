@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Model : MonoBehaviour
 {
+    public int maxHp;
     public int hp;
     public PlayerCameraController cameraController;
 

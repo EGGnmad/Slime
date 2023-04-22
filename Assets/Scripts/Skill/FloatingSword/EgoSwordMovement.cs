@@ -51,7 +51,7 @@ public class EgoSwordMovement : MonoBehaviour
     {
         if (collision.gameObject == target.gameObject)
         {
-            collision.GetComponent<PlayerModel>().TakeDamage(1);
+            collision.GetComponent<Model>().TakeDamage(1);
         }
     }
 }

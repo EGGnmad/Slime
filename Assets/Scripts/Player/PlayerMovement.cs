@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
 
 
+    private bool isStunned;
+
     [Header("Others")]
     [SerializeField] private int damage;
     private bool isFacingRight = true;
@@ -26,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private AttackClass attack;
+
+    [SerializeField] private GameObject spaceKeyUI;
 
     private void Start()
     {
@@ -48,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         moveVelocity *= speed;
 
         // dash
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        if (Input.GetKeyDown(KeyCode.Space) && canDash && !isStunned)
         {
             animator.SetTrigger("dash");
             StartCoroutine(Dash());
@@ -58,11 +63,16 @@ public class PlayerMovement : MonoBehaviour
         {
             attack.Attack(damage, 0.5f);
         }
+
+        if (!canDash)
+        {
+            spaceKeyUI.GetComponent<Image>().fillAmount += Time.deltaTime / (dashingCooldown+dashingTime);
+        }
     }
 
     private void LateUpdate()
     {
-        if (isDashing) return;
+        if (isDashing || isStunned) return;
 
         rb.velocity = moveVelocity;
 
@@ -86,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         rb.velocity = beforeDirection * dashingPower;
+        spaceKeyUI.GetComponent<Image>().fillAmount = 0f;
 
         yield return new WaitForSeconds(dashingTime);
 
@@ -94,5 +105,18 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
 
         canDash = true;
+    }
+
+    public void Stunned(float time)
+    {
+        StartCoroutine(Stun(time));
+    }
+
+    private IEnumerator Stun(float time)
+    {
+        rb.velocity = Vector2.zero;
+        isStunned = true;
+        yield return new WaitForSeconds(time);
+        isStunned = false;
     }
 }

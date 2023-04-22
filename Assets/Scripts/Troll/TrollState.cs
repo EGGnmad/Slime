@@ -21,6 +21,14 @@ public class TrollState : StateModel
             case "GroundAttack-Swing":
                 movement.GroundAttackSwingStart();
                 break;
+
+            case "PunchAttack-Start":
+                movement.Punch();
+                break;
+
+            case "SwingAttack-Start":
+                movement.SwingAttackStart();
+                break;
         }
     }
 
@@ -38,6 +46,14 @@ public class TrollState : StateModel
             case "GroundAttack-Swing":
                 movement.GroundAttackSwing();
                 break;
+
+            case "PunchAttack-Swing":
+                movement.PunchSwing();
+                break;
+
+            case "SwingAttack-Swing":
+                movement.SwingAttackUpdate();
+                break;
         }
     }
 
@@ -50,6 +66,14 @@ public class TrollState : StateModel
                 break;
             case "GroundAttack-Swing":
                 movement.GroundAttackExit();
+                break;
+
+            case "PunchAttack-Swing":
+                movement.PunchExit();
+                break;
+
+            case "SwingAttack-Swing":
+                movement.SwingAttackExit();
                 break;
         }
     }

@@ -45,7 +45,7 @@ public class KingMovement : MonoBehaviour
     [Header("Others")]
     [SerializeField] private TrailRenderer trailRenderer;
 
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private bool isFacingRight = true;
 
     private Rigidbody2D rb;
@@ -63,8 +63,6 @@ public class KingMovement : MonoBehaviour
         attack = GetComponent<AttackClass>();
         swordGenerator = GetComponent<CircleGenerator>();
         egoSwordGenerator = GetComponent<EgoSwordGenerator>();
-
-        player = GameObject.Find("Player");
     }
 
     // Idle

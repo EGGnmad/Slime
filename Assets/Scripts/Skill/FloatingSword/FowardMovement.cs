@@ -33,7 +33,7 @@ public class FowardMovement : MonoBehaviour
     {
         if (collision.CompareTag(EnemyTag))
         {
-            collision.GetComponent<PlayerModel>().TakeDamage(damage);
+            collision.GetComponent<Model>().TakeDamage(damage);
         }
     }
 }
