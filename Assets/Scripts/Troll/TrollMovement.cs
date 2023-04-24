@@ -90,11 +90,11 @@ public class TrollMovement : MonoBehaviour
             swingAttackCooldown /= 2;
         }
 
-        if ((distance <= startGroundAttackMaxDistance && canGroundAttack && !isAttacking) || (canGroundUp && !isAttacking))
+        if (distance <= startSwingAttackMaxDistance && canSwingAttack && !isAttacking)
         {
             animator.SetBool("walk", false);
 
-            animator.SetTrigger("attack1");
+            animator.SetTrigger("attack3");
         }
 
         else if (distance <= startPunchAttackMaxDistance && canPunchAttack && !isAttacking)
@@ -104,12 +104,13 @@ public class TrollMovement : MonoBehaviour
             animator.SetTrigger("attack2");
         }
 
-        else if (distance <= startSwingAttackMaxDistance && canSwingAttack && !isAttacking)
+        else if ((distance <= startGroundAttackMaxDistance && canGroundAttack && !isAttacking) || (canGroundUp && !isAttacking))
         {
             animator.SetBool("walk", false);
 
-            animator.SetTrigger("attack3");
+            animator.SetTrigger("attack1");
         }
+
 
         else if (distance >= startRunMinDistance)
         {
